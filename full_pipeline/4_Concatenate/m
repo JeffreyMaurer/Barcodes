@@ -1,0 +1,1 @@
+g++ concatenate.cpp -o concatenate.exe -std=c++0x -pipe -march=native
