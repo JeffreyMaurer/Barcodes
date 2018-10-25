@@ -1,0 +1,3 @@
+. r
+
+this will run r and be able to change the pwd. This will be useful.
