@@ -1,0 +1,9 @@
+length_t fromQuad(string quad)
+{
+	digit j(0); length_t result(0);
+	for (digit i = quad.length() - 1; i >= 0; i--)
+	{
+		result += (((digit)quad[i]) - '0') * Power(4, quad.length() - (i+1));
+	}
+	return result;
+}
