@@ -1,0 +1,60 @@
+length: 3
+largest: HR1T2-2
+size: 2
+time: 0
+
+length: 4
+largest: HR0T0-1
+size: 2
+time: 0
+
+length: 5
+largest: HR0T1-2
+size: 5
+time: 0
+
+length: 6
+largest: HR2T4-1
+size: 12
+time: 0
+
+length: 7
+largest: HR32T4-1
+size: 22
+time: 0
+
+length: 8
+largest: HR1T3-1
+size: 45
+time: 0
+
+length: 9
+largest: HR8T3-4
+size: 92
+time: 0
+
+length: 10
+largest: HR10T1-3
+size: 187
+time: 0
+
+length: 11
+largest: HR20T3-4
+size: 385
+time: 0
+
+length: 12
+largest: HR40T4-0
+size: 896
+time: 0
+
+length: 13
+largest: HR94T4-0
+size: 1940
+time: 1
+
+length: 14
+largest: HR158T2-2
+size: 4392
+time: 11
+
