@@ -1,0 +1,15 @@
+string toQuad(length_t m, int n)
+{
+    string quad;
+    for (int j = (n - 1); j >= 0; j--)
+    {
+        quad += to_string(Digit(m, j));
+    }
+    return quad;
+}
+
+//make sure input is good TODO -i option
+bool Good_Args(int argc, char* argv[], int &start, int &end)
+{
+    if (argc == 1)
+    {

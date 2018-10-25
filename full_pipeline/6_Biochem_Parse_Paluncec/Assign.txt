@@ -1,0 +1,60 @@
+string Assign_Nucleotides(int IntCode, int partition, int n){
+    string Nucleotides;
+    int digit = 0;
+
+    for (int j = 0; j < n; j++){
+
+        digit = Digit(IntCode, j);
+
+        switch (partition){
+        case 0:switch (digit)
+        {
+          case 0: Nucleotides += 'G'; break;
+          case 1: Nucleotides += 'C'; break;
+          case 2: Nucleotides += 'A'; break;
+          case 3: Nucleotides += 'T'; break;
+        } break;
+
+        case 1:switch (digit)
+        {
+          case 0: Nucleotides += 'G'; break;
+          case 1: Nucleotides += 'T'; break;
+          case 2: Nucleotides += 'C'; break;
+          case 3: Nucleotides += 'A'; break;
+        } break;
+
+        case 2:switch (digit)
+        {
+          case 0: Nucleotides += 'A'; break;
+          case 1: Nucleotides += 'G'; break;
+          case 2: Nucleotides += 'C'; break;
+          case 3: Nucleotides += 'T'; break;
+        } break;
+
+        case 3:switch (digit)
+        {
+          case 0: Nucleotides += 'G'; break;
+          case 1: Nucleotides += 'A'; break;
+          case 2: Nucleotides += 'T'; break;
+          case 3: Nucleotides += 'C'; break;
+        } break;
+
+        case 4:switch (digit)
+        {
+          case 0: Nucleotides += 'A'; break;
+          case 1: Nucleotides += 'G'; break;
+          case 2: Nucleotides += 'T'; break;
+          case 3: Nucleotides += 'C'; break;
+        } break;
+
+        case 5:switch (digit) 
+        {
+          case 0: Nucleotides += 'A'; break;
+          case 1: Nucleotides += 'T'; break;
+          case 2: Nucleotides += 'G'; break;
+          case 3: Nucleotides += 'C'; break;
+        } break;
+        }
+    }
+    return Nucleotides;
+}

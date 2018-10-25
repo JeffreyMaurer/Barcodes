@@ -1,0 +1,9 @@
+length_t Power(int n, int m){                     //Returns the power of one to the other as an int
+    if (m == 0) return 1;
+    else if (m == 1) return n;
+    length_t product = n;
+    for (int i = 1; i < m; i++){
+        product *= n;
+    }
+    return product;
+}

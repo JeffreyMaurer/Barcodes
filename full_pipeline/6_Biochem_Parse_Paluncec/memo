@@ -1,0 +1,4 @@
+no clobber option
+threads are being a b**** to implement now for some reason. clone taking up 57% of 8 time.
+binary files instead of text is being written for some reason. must investigate tomorrow.
+
