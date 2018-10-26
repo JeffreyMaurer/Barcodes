@@ -1,0 +1,1 @@
+cat time |awk -F " " {print } > Otime
