@@ -3,19 +3,33 @@
 #include<vector>
 #include<chrono>
 #include<string>
-//#include"node.h"
+#include"node.h"
 using namespace std;
 using namespace chrono;
 
 using ull_t = unsigned long long;
 using digit = short;
-using length_t = unsigned int;
 const int quaternary = 4;
 
-length_t power(int base, int exponent);
+struct Data
+{
+	int length;
+	int setsize;
+	int num_additions;
+
+	int avg_num_attempts;
+
+	Data(int length_ = 0, int setsize_ = 0, int num_additions_ = 0, int avg_num_attempts_ = 0) :
+		length(length_), setsize(setsize_), num_additions(num_additions_),
+		avg_num_attempts(avg_num_attempts_)	{}
+};
+
+int power(int base, int exponent);
 ostream& operator<<(ostream& os, vector<bool>& input);
 ostream& operator<<(ostream& os, vector<int>& input);
 ostream& operator<<(ostream& os, vector< duration<double> >& input);
+ostream& operator<<(ostream& os, node& input);
+ostream& operator<<(ostream& os, Data& input);
 
 template<typename T>
 ostream& operator<<(ostream& os, vector<T>& input)
@@ -26,6 +40,8 @@ ostream& operator<<(ostream& os, vector<T>& input)
 	}
 	return os;
 }
+
+inline string toQuad(int code, digit length);
 
 inline int num_permutations(digit deletions)
 {
@@ -43,14 +59,4 @@ inline int num_permutations(digit deletions)
 inline digit Digit(int num, digit dig)
 {
 	return (num >> (dig * 2)) & 3;
-}
-
-inline string toQuad(int code, digit length)
-{
-        string num;
-        for (int i = length - 1; i >= 0; i--)
-        {
-                num += to_string(Digit(code, i));
-        }
-        return num;
 }

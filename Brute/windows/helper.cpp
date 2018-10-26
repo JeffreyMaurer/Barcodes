@@ -1,6 +1,6 @@
 #include"helper.h"
 
-length_t power(int base, int exponent)
+int power(int base, int exponent)
 {
 	if (exponent == 0) return 1;
 	else if (exponent == 1) return base;
@@ -32,9 +32,32 @@ ostream& operator<<(ostream& os, vector<int>& input)
 {
 	for (int i = input.size() - 1; i >= 0; i--)
 	{
-		os << input[i] << "\t";
+		os << input[i] << "\n";
 	}
 	return os;
 }
 
+ostream& operator<<(ostream& os, node& input)
+{
+	os << "value: " << input.value << "\t parent value: " << input.parent->value <<
+		"\nvalues of next: " << input.next << endl;
+	return os;
+}
 
+ostream& operator<<(ostream& os, Data& input)
+{
+	os << input.length << ',' << input.setsize << ',' << input.num_additions << ',' <<
+		input.avg_num_attempts;
+
+	return os;
+}
+
+inline string toQuad(int code, digit length)
+{
+	string num;
+	for (int i = length - 1; i >= 0; i--)
+	{
+		num += to_string(Digit(code, i));
+	}
+	return num;
+}

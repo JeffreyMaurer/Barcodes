@@ -1,52 +1,40 @@
 #include "Tree.h"
 #include"helper.h"
 #include<algorithm>
-#include<chrono>
-#include<SFML/Window.hpp>
+#include<iomanip>
+#include<thread>
+using namespace std;
 
-Tree::Tree(digit length_, digit del_) : length(length_), check(length_, del_), solution_length(1) {}
+Tree::Tree(digit length_, digit del_) : length(length_), check(length_, del_), solution() {}
 
 void Tree::solution_search()
 {
 	int num = power(quaternary, length);
-	for (int i = 0; i < num - solution_length; i++)
+	ofstream log("logs/" + to_string(length) + "log.txt");
+	for (int contender = 0; contender < num; contender++)
 	{
-		//expand from the root
-		node leaf(&m_root, i);
-
-		//which nums can work with this num?
-		for (int j = num; j >= i; j--)
+		//can this number work with all previous
+		//this loop can be parallelized, but bad must be atomized
+		bool bad = false;
+		for (auto& value : solution)
 		{
-			if (check.is_compatible(i, j))
+			if (!check.is_compatible(contender, value))
 			{
-				leaf.next.push_back(j);
+				bad = true;
+				break;
 			}
 		}
-
-		//start the depth-first search
-		next_layer(leaf);
+		if (!bad) 
+		{
+			solution.push_back(contender); 
+			log << (float) contender / num<< endl;
+		}
 	}
 }
 
-void Tree::next_layer(node& root)
+/*void Tree::next_layer(node& root)
 {
-	//output where I am
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
-	{
-		node * backtrack = &root;
-		vector<int> i;
-		while (backtrack->parent != nullptr)
-		{
-			i.push_back(backtrack->value);
-			backtrack = backtrack->parent;
-		}
-		cout << i << endl;
-
-		if (!solutions.empty())
-		{
-			cout << "current best solution: " << solutions[0] << endl;
-		}
-	}
+	thread dump(&node::mem_dump, root.parent);
 
 	while (root.next.size())
 	{
@@ -60,60 +48,76 @@ void Tree::next_layer(node& root)
 		//3 ideas for prune, f_it e, r_it e, and e-r idiom
 
 		//prune next
-		for (auto num = leaf.next.rbegin(); num != leaf.next.rend(); num++)
+		for (auto num = leaf.next.begin(); num != leaf.next.end(); num++)
 		{
 			if (!check.is_compatible(leaf.value, *num))
 			{
-				//leaf.next.erase(--num.base());
 				*num = INT_MAX;
 			}
-			//else
-			//{
-				//num++;
-			//}
 		}
 
 		leaf.next.erase(remove(leaf.next.begin(), leaf.next.end(), INT_MAX), leaf.next.end());
 
+		leaf.next.shrink_to_fit();
+
 		//we made it to the end, is this a solution route?
 		if (leaf.next.empty())
 		{
-			node * backtrack = &leaf;
-			int distance(0);
-			string solution;
-			while (backtrack->parent != nullptr)
-			{
-				solution += to_string(backtrack->value) + " ";
-				distance++;
-				backtrack = backtrack->parent;
-			}
-
-			if (distance > solution_length)
+			if (leaf.distance > solution_length)
 			{
 				solutions.clear();
-				solution_length = distance;
+				solution_length = leaf.distance;
+
+				node * backtrack = &leaf;
+				string solution;
+				while (backtrack->parent != nullptr)
+				{
+					solution += to_string(backtrack->value) + " ";
+					backtrack = backtrack->parent;
+				}
+
 				solutions.push_back(solution);
+				if (solution_length >= 5390)
+				{
+					ofstream out("data/L12D2S" + to_string(solution_length) + "_mem.txt");
+					//node * backtrack = &leaf;
+					//while (backtrack->parent != nullptr)
+                                	//{
+                                        	//out << to_string(backtrack->value) << '\n';
+                                        	//backtrack = backtrack->parent;
+                                	//}
+                                	out << solution << endl;
+				}
 			}
-			else if (distance == solution_length)
+			else if (leaf.distance == solution_length)
 			{
+				node * backtrack = &leaf;
+				string solution;
+				while (backtrack->parent != nullptr)
+				{
+					solution += to_string(backtrack->value) + " ";
+					backtrack = backtrack->parent;
+				}
+
 				solutions.push_back(solution);
 			}
 
-			return;
+			continue;
 		}
 
 		//recurse!! depth first
 		next_layer(leaf);
 
-	} //for loop
-}
+	} //while loop
+
+	dump.join();
+	root.parent->mem_retrieve();
+}*/
 
 void Tree::print_solutions(ofstream& out)
 {
-	for (auto& solution : solutions)
-	{
-		out << solution << endl;
-	}
+	out << solution << endl;
+	out << solution.size() << endl;
 }
 
 Tree::~Tree() {}

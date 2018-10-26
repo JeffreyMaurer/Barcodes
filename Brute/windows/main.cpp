@@ -4,26 +4,29 @@
 #include<string>
 #include<fstream>
 #include<chrono>
-#include<cstdlib>
-#include<vector>
+#include<iterator>
+#include<random>
 using namespace std;
 
-inline bool GoodArgs(int argc, char** argv)
+string print(int input, int length)
 {
-	return (argc == 3) && (atoi(argv[1]) <= atoi(argv[2]));
+	string hi;
+	for (int i = 0; i < length*2; i++)
+	{
+		hi += to_string((input >> i) & 1);
+	}
+	return hi;
 }
 
-int main(int argc, char** argv)
+int main()
 {
-	if (!GoodArgs(argc, argv)) {cout << "bad input" << endl; return -1;}
-
 	using namespace chrono;
 	auto begin = high_resolution_clock::now();
 
-	int del = 2;
-	for (int length = atoi(argv[1]); length <= atoi(argv[2]); length++) {
+	int length = 5;
+	int del = 3;
 
-	ofstream out("data/BruteL" + to_string(length) + "D" + to_string(del) + "_greedy.txt");
+	ofstream out("BruteL" + to_string(length) + "D" + to_string(del) + ".txt");
 
 	try
 	{
@@ -46,9 +49,10 @@ int main(int argc, char** argv)
 	}
 	
 	auto end = high_resolution_clock::now();
-	auto dur = duration_cast<duration<double>> (end - begin);
-	out << "took " << dur.count() << " seconds" << endl;
-	}
+	duration<double> dur = duration_cast<duration<double>> (end - begin);
+	cout << "took " << dur.count() << " seconds" << endl;
+
+	std::system("pause");
 
 	return 0;
 }
