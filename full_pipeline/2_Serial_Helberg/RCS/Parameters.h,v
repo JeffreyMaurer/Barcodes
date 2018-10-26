@@ -1,0 +1,37 @@
+head	1.1;
+access;
+symbols;
+locks
+	maurerj1:1.1; strict;
+comment	@ * @;
+
+
+1.1
+date	2015.12.17.16.37.18;	author maurerj1;	state Exp;
+branches;
+next	;
+
+
+desc
+@To be adjusted.
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@//GC Parameters
+const int GC_min = 0.25;
+const int GC_max = 0.75;
+
+//Tandem Repeat Parameter
+const int TR_Cutoff = 9;
+
+//Palindrome parameter
+const int Palindrome_min = 4;
+
+//Base Stacking parameter
+const int Stacking_cutoff = 10; //more research needed
+@

@@ -1,0 +1,206 @@
+head	1.2;
+access;
+symbols;
+locks
+	maurerj1:1.2; strict;
+comment	@// @;
+
+
+1.2
+date	2015.12.23.18.27.00;	author maurerj1;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2015.12.10.22.27.46;	author maurerj1;	state Exp;
+branches;
+next	;
+
+
+desc
+@Should work
+@
+
+
+1.2
+log
+@regular checkup
+@
+text
+@//Examine how it scales
+
+#include"BioChem.h"
+#include"Helberg_Functions.h"
+#include"Parameters.h"
+#include<iostream>
+#include<fstream>
+#include<vector>
+#include<algorithm>
+#include<sstream>
+#include<ctime>
+#include<locale>
+#include<stdio.h>
+
+using namespace std;
+
+//if I want to use biochem, these are important
+int ToInt(string);				//converts a string to int
+int ToInt(int);					//does nothing
+
+//This is the datatype that stores the CodeBooks--duh
+struct CodeBook{
+	string Residue;
+	vector<string> CodeWords;
+};
+
+//this sorts the codebooks
+bool Sort_Residues(CodeBook i, CodeBook j) {
+return (i.CodeWords.size() > j.CodeWords.size());
+}
+
+
+int main(){
+for (int n = Starting_Length_File; n <= Ending_Length_File; n++){ //which files should I look at?
+
+	time_t now; //actually now, but will not be now later when used to test how fast this program is.
+	ifstream Input;
+	ofstream Output;
+	string inputfile, outputfile;
+	stringstream N; //for some reason, it's hard to turn a number into a string
+
+	now = time(0);
+	
+	N << n;
+	
+	inputfile = "../Results/COMBINED_CW_B4_D2_L" + N.str() + "_BIO.txt"; //previously processed data
+	//TODO: get the bottom line to work
+//	inputfile = "~/mathematics/datamine/bayruns/CodeWordsLength" + N.str() + inputfile;	
+//	inputfile = "COMBINED_CW_B4_D2_L" + N.str() + ".txt"
+	
+	Input.open(inputfile.c_str());
+
+	outputfile = "../Results/COMBINED_CW_B4_D2_L" + N.str() + "_BIO_Arranged.txt";
+//	outputfile = "COMBINED_CW_B4_D2_L" + N.str() + "_BIO_ARRANGED.txt"
+	Output.open(outputfile.c_str());
+	//TODO: r and d need R&D to later be made user specific/loop-able
+	int r = 0, d = 2;
+	string code;
+
+	vector<CodeBook> CodeBooks(Weight(n+1, 4, d));
+
+	for (r = 0; r < Weight(n+1, 4, d); r++){
+		do{
+			getline(Input, code);
+			if (code[0] == 'R') CodeBooks[r].Residue = code;
+			else if (isdigit(code[0]))CodeBooks[r].CodeWords.push_back(code);
+		} while (code != ""); //if the line is empty, end the loop and move to the next
+		//Biochem(CodeBook[r], n);
+		if (r%256==0) {fflush(stdout); cout << (r / Weight(n+1, 4, d)) << "\r";} //I like my progress bar
+	}
+
+	sort(CodeBooks.begin(), CodeBooks.end(), Sort_Residues); //sort them! TODO:Maybe I can do better with a vector that holds the largest book and empties if it finds another
+
+	for (r = 0; r < Weight(n+1, 4, d); r++){
+	
+		if (CodeBooks[r].CodeWords.size() >= CodeBooks[0].CodeWords.size()){ //TODO:parameters.h should have the cutoff value, then the last TODo is worthless	
+
+			Output << CodeBooks[r].Residue << endl; //print residue
+
+			for (unsigned int i = 0; i < CodeBooks[r].CodeWords.size(); i++){
+				Output << CodeBooks[r].CodeWords[i] << endl; //print codewords
+			}
+			Output << endl;
+		}
+	}
+
+	Input.close();
+	Output.close();
+
+	fflush(stdout);
+
+	cout << "Finished " << n << " in " << time(0) - now << " s" << endl;
+}
+	return 0;
+}
+/*
+int ToInt(int i){
+	return i;
+}
+
+int ToInt(string i){
+	int m = 0;
+	for (int j = 0; j < i.length(); j++){
+		m += (i[j] - '0') * Power(4, (i.length() - j) - 1);
+	}
+	return m; 
+}
+
+string toQuad(int m, int n){
+
+	string quad;
+	int g;
+
+	for (int j = (n - 1); j >= 0; j--){
+		g = (m & (3 * Power(4, j))) >> (j * 2);
+		stringstream ss;
+		ss << g;
+		quad.append(ss.str());
+	}
+
+	return quad;
+}
+*/
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d5 1
+d17 1
+a19 1
+//string toQuad(int, int);			//returns the codeword
+d21 1
+d27 1
+d34 1
+a34 1
+for (int n = 5; n < 14; n++){
+d36 1
+a36 1
+	time_t now;
+d40 1
+a40 1
+	stringstream N;
+d45 3
+a47 2
+
+	inputfile = "../BioResults/COMBINED_CW_B4_D2_L" + N.str() + "_BIO.txt";
+d53 1
+a53 1
+	outputfile = "../BioResults/COMBINED_CW_B4_D2_L" + N.str() + "_BIO_Arranged.txt";
+d56 1
+a56 1
+
+d67 1
+a67 1
+		} while (code != "");
+d69 1
+a69 1
+		if (r%256) printf("%d\r", (r / Weight(n+1, 4, d)));
+d72 1
+a72 1
+	sort(CodeBooks.begin(), CodeBooks.end(), Sort_Residues);
+d75 4
+a78 2
+		
+		Output << CodeBooks[r].Residue << endl;
+d80 4
+a83 2
+		for (unsigned int i = 0; i < CodeBooks[r].CodeWords.size(); i++){
+			Output << CodeBooks[r].CodeWords[i] << endl;
+a84 1
+		Output << endl;
+d90 2
+@

@@ -1,0 +1,211 @@
+head	2.0;
+access;
+symbols;
+locks
+	maurerj1:2.0
+	maurerj1:1.1; strict;
+comment	@# @;
+
+
+2.0
+date	2016.01.27.17.02.18;	author maurerj1;	state Exp;
+branches;
+next	1.8;
+
+1.8
+date	2015.12.23.02.02.53;	author maurerj1;	state Exp;
+branches;
+next	1.7;
+
+1.7
+date	2015.12.23.00.49.47;	author maurerj1;	state Exp;
+branches;
+next	1.6;
+
+1.6
+date	2015.12.18.02.44.38;	author maurerj1;	state Exp;
+branches;
+next	1.5;
+
+1.5
+date	2015.12.10.23.07.23;	author maurerj1;	state Exp;
+branches;
+next	1.4;
+
+1.4
+date	2015.12.10.23.06.25;	author maurerj1;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	2015.12.08.15.47.36;	author maurerj1;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2015.12.02.22.47.13;	author maurerj1;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2015.12.02.22.44.59;	author maurerj1;	state Exp;
+branches;
+next	;
+
+
+desc
+@@
+
+
+2.0
+log
+@Just BCPArranged now. fully compiles with its own header file.
+@
+text
+@CC = g++
+OBJS = Helberg_Functions.o BioChem.o BCPArrange.o
+
+ProcessCodeBooks: $(OBJS)
+	$(CC) $(OBJS) -o ProcessCodeBooks
+
+Helberg_Functions.o: Helberg_Functions.cpp Helberg_Functions.h
+	 $(CC) -c Helberg_Functions.cpp
+
+BioChem.o: BioChem.cpp BioChem.h
+	$(CC) -c BioChem.cpp
+
+BCPArrange.o: BCPArrange.cpp BCPArrange.h
+	$(CC) -c BCPArrange.cpp
+
+.PHONY : clean
+clean :
+	-rm edit $(OBJS)
+@
+
+
+1.8
+log
+@parameters with Biochemparse
+@
+text
+@d2 1
+a2 1
+OBJS = BioChem.o BioChemParse.o Helberg_Functions.o
+d4 2
+a5 2
+BioChemParserArranged: $(OBJS)
+	$(CC) $(OBJS) -o BioChemParserArranged
+d7 4
+a10 1
+BioChem.o: BioChem.cpp BioChem.h Helberg_Functions.h Parameters.h
+d13 1
+a13 1
+BioChemParse.o: BCPArrange.cpp BioChem.h Helberg_Functions.h Parameters.h
+a15 3
+Helberg_Functions.o: Helberg_Functions.cpp Helberg_Functions.h
+	$(CC) -c Helberg_Functions.cpp
+
+@
+
+
+1.7
+log
+@Parameters.h is with BCPArrange.cpp
+@
+text
+@d2 1
+a2 1
+OBJS = BioChem.o BCPArrange.o Helberg_Functions.o
+d4 2
+a5 2
+BCPArranged: $(OBJS)
+	$(CC) $(OBJS) -o BCPArranged
+d10 1
+a10 1
+BCPArrange.o: BCPArrange.cpp BioChem.h Helberg_Functions.h Parameters.h
+@
+
+
+1.6
+log
+@BCPArrange and now with parameters.h
+@
+text
+@d10 1
+a10 1
+BCPArrange.o: BCPArrange.cpp BioChem.h Helberg_Functions.h
+@
+
+
+1.5
+log
+@now it works
+with BCPA
+@
+text
+@d7 1
+a7 1
+BioChem.o: BioChem.cpp BioChem.h Helberg_Functions.h
+@
+
+
+1.4
+log
+@works with BCPArranged
+@
+text
+@d2 1
+a2 1
+OBJS = BioChem.o BCPArranged.o Helberg_Functions.o
+d10 1
+a10 1
+BCPArranged.o: BCPArrange.cpp BioChem.h Helberg_Functions.h
+@
+
+
+1.3
+log
+@Works for arrange
+@
+text
+@d2 1
+a2 1
+OBJS = BioChem.o BCP.o Helberg_Functions.o
+d10 1
+a10 1
+BCP.o: BCPArrange.cpp BioChem.h Helberg_Functions.h
+@
+
+
+1.2
+log
+@now compiles BCPArrange.cpp
+@
+text
+@d2 1
+a2 1
+OBJS = BioChem.o BioChemParse.o Helberg_Functions.o
+d4 2
+a5 2
+BioChemParserArranged: $(OBJS)
+	$(CC) $(OBJS) -o BioChemParserArranged
+d10 1
+a10 1
+BioChemParse.o: BCPArrange.cpp BioChem.h Helberg_Functions.h
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d4 2
+a5 2
+BioChemParser: $(OBJS)
+	$(CC) $(OBJS) -o BioChemParser
+d10 2
+a11 2
+BioChemParse.o: BioChemParse.cpp BioChem.h Helberg_Functions.h
+	$(CC) -c BioChemParse.cpp
+@

@@ -1,0 +1,93 @@
+head	1.1;
+access;
+symbols;
+locks
+	maurerj1:1.1; strict;
+comment	@// @;
+
+
+1.1
+date	2015.10.29.17.08.54;	author maurerj1;	state Exp;
+branches;
+next	;
+
+
+desc
+@Not much to say. Have yet to test.
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@#include"BioChem.h"
+#include<iostream>
+#include<fstream>
+#include<vector>
+#include<algorithm>
+
+using namespace std;
+
+string ToString(int);			//converts an int to string
+int ToInt(string);				//converts a string to int
+int ToInt(int);					//does nothing
+int Power(int, int);
+	
+int main(){
+
+	ifstream CodeSize;
+	ofstream CodeBooks;
+
+	CodeBooks.open("CodeBookq4n5d2Bio.txt");
+	CodeSize.open("CodeBookq4n5d2.txt");
+
+	int n, r, s, code;
+	vector<int> CodeBook;
+
+	
+	while (!EOF){
+		CodeSize >> n;
+		CodeSize >> r;
+		CodeSize >> s;
+		for (int i = 0; i < s; i++){
+			while (CodeSize >> code){
+				CodeBook.push_back(ToInt(code));
+			}
+		}
+
+
+		Biochem(CodeBook, n);
+
+		for (int i = 0; i < CodeBook.size(); i++){
+			CodeBooks << CodeBook[i] << endl;
+		}
+	}
+
+	CodeSize.close();
+	CodeBooks.close();
+
+}
+
+int ToInt(int i){
+	return i;
+}
+
+int ToInt(string i){
+	int m;
+	for (int j = 0; j < i.length(); j++){
+		m += (i[j] - '0') * Power(4, (i.length() - j) - 1);
+	}
+}
+
+int Power(int n, int m){ //Returns the power of one to the other as an int
+	if (m == 0) return 1;
+	else if (m == 1) return n;
+	int product = n;
+	for (int i = 1; i < m; i++){
+		product *= n;
+	}
+	return product;
+}
+@

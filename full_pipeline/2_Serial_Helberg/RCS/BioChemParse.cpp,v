@@ -1,0 +1,203 @@
+head	1.2;
+access;
+symbols;
+locks; strict;
+comment	@// @;
+
+
+1.2
+date	2016.01.22.14.13.46;	author maurerj1;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2015.11.13.13.54.31;	author maurerj1;	state Exp;
+branches;
+next	;
+
+
+desc
+@works
+@
+
+
+1.2
+log
+@I'm done with it.
+@
+text
+@//Examine how it scales - n*logn
+#include"BioChem.h"
+#include"Helberg_Functions.h"
+#include<iostream>
+#include<fstream>
+#include<vector>
+#include<algorithm>
+#include<sstream>
+#include<ctime>
+
+using namespace std;
+
+const int Starting_Length_File = 5;
+const int Ending_Length_File = 13;
+
+int ToInt(string);				//converts a string to int
+int ToInt(int);					//does nothing
+string toQuad(int, int);			//returns the codeword
+	
+int main(){
+for (int n = Starting_Length_File; n <= Ending_Length_File ; n++){
+
+	time_t now;
+	ifstream Input;
+	ofstream Output;
+	string inputfile, outputfile;
+	stringstream N;
+
+	now = time(0);
+	
+	N << n;
+
+	inputfile = "./DataFiles/COMBINED_CW_B4_D2_L" + N.str() + ".txt";
+//	inputfile = "~/mathematics/datamine/bayruns/CodeWordsLength" + N.str() + inputfile;	
+
+	
+	Input.open(inputfile.c_str());
+
+	outputfile = "../Results/COMBINED_CW_B4_D2_L" + N.str() + "_BIO.txt";
+
+	Output.open(outputfile.c_str());
+
+	int r = 0, d = 2, GC;
+	string code, line;
+
+	Input >> line;
+	
+	do{
+		vector<int> CodeBook;
+		while (Input >> code && code[0] != 'R'){
+			CodeBook.push_back(ToInt(code));
+		}
+		
+		GC = Biochem(CodeBook, n);
+                
+
+		Output << "R" << r << "GC" << GC << endl;
+
+		for (int i = 0; i < CodeBook.size(); i++){
+			//cout << CodeBook[i] << endl;
+			string m = toQuad(CodeBook[i], n);
+			Output << m << endl;
+		} 
+                
+
+		Output << endl;
+		r++;
+		if (r%256==0) printf("%d\r", (r / Weight(n+1, 4, d)));
+	} while (r < Weight(n+1, 4, d));
+
+	Input.close();
+	Output.close();
+
+	cout << "Finished " << n << " in " << time(0) - now << " s" << endl;
+}
+	return 0;
+
+}
+
+int ToInt(int i){
+	return i;
+}
+
+int ToInt(string i){
+	int m = 0;
+	for (int j = 0; j < i.length(); j++){
+		m += (i[j] - '0') * Power(4, (i.length() - j) - 1);
+	}
+	return m; // server
+}
+
+string toQuad(int m, int n){
+
+	string quad;
+	int g;
+
+	for (int j = (n - 1); j >= 0; j--){
+		g = (m & (3 * Power(4, j))) >> (j * 2);
+		stringstream ss;
+		ss << g;
+		quad.append(ss.str());
+	}
+
+	return quad;
+}
+
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d1 1
+a1 2
+//Examine how it scales
+
+d9 1
+a11 1
+//CodeBookq4n5d2
+d13 3
+a15 1
+string ToString(int);			//converts an int to string
+d18 1
+a18 2
+string toQuad(int, int);		//returns the codeword
+//string ToSTring(int);			//takes an int and returns a string
+d21 1
+d23 1
+d26 9
+a34 1
+	//string inputfile;
+d36 2
+a37 2
+	//cout << "what file should I look at?" << endl;
+	//cin >> inputfile;
+d39 1
+d41 1
+a41 2
+	Input.open("COMBINED_CW_B4_D2_L6.txt");
+	Output.open("COMBINED_CW_B4_D2_L6_BIO.txt");
+d43 1
+a43 1
+	int n = 6, r = 0, residue = 0, d = 2;
+a45 3
+	cout << "what is the length?" << endl;
+	cin >> n;
+
+d47 1
+a47 1
+	cout << "allizwell" << endl;
+d53 3
+a55 3
+		cout << "allizstillwell" << endl;
+		Biochem(CodeBook, n);
+                cout << "allizstillwellbio" << endl;
+d57 1
+a57 1
+		Output << "n: " << n << endl << "r: " << r << endl;
+d60 1
+a60 1
+			cout << CodeBook[i] << endl;
+d64 1
+a64 1
+                cout << "allizstillwellouput" << endl;
+d68 2
+a69 2
+		residue++;
+	} while (residue < Weight(n+1, 4, d));
+d74 2
+a75 2
+	std::system("pause");
+
+@

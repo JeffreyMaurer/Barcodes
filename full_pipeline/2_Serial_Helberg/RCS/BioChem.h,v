@@ -1,0 +1,39 @@
+head	1.1;
+access;
+symbols;
+locks
+	maurerj1:1.1; strict;
+comment	@ * @;
+
+
+1.1
+date	2015.10.29.17.08.54;	author maurerj1;	state Exp;
+branches;
+next	;
+
+
+desc
+@It's just a header.
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@#include<string>
+#include<iostream>
+#include<vector>
+
+using namespace std;
+
+int Biochem(vector<int>&, int);													//determines if each code in each code book is biochemically acceptable, returns GC partition
+string Assign_Nucleotides(int, int, int);										//Assigns nucleotides A, T, C and G to 0, 1, 2 and 3
+string Reverse_Complement(string);												//Returns the reverse complement
+void Palindromes(vector<vector<int>>&, vector<vector<string>>&);				//Searches for palindromes and inverse repeats
+void Base_Stacking_Stability(vector<vector<int>>&, vector<vector<string>>&);	//check base stacking stability
+void GC_Content(vector<vector<int>>&, vector<vector<string>>&);					//GC content
+void Tandem_Repeat(vector<vector<int>>&, vector<vector<string>>&);				//look for tandem repeats
+double Stacking_Stability(string);												//returns the stability of the BP neighbor interactions
+@

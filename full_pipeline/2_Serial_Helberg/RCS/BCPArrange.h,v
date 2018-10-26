@@ -1,0 +1,54 @@
+head	1.1;
+access;
+symbols;
+locks
+	maurerj1:1.1; strict;
+comment	@ * @;
+
+
+1.1
+date	2016.01.27.19.38.22;	author maurerj1;	state Exp;
+branches;
+next	;
+
+
+desc
+@clean up main executable a bit, made this file.
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@#pragma once
+#include"BioChem.h"
+#include<iostream>
+#include<fstream>
+#include<sstream>
+#include<ctime>
+#include<locale>
+#include<cstdlib>
+
+using namespace std;
+
+inline length_t ToLength_t(string);            //converts a string to int
+inline length_t ToLength_t(length_t);          //does nothing
+inline string toQuad(int, int);                //int to quad int string
+
+//This is the datatype that stores the CodeBooks
+struct CodeBook
+{
+        string Residue;
+        int GC;
+        vector<length_t> CodeWords;
+};
+
+//this sorts the codebooks
+bool Sort_Residues(CodeBook i, CodeBook j) 
+{
+return (i.CodeWords.size() > j.CodeWords.size());
+}
+
+@
