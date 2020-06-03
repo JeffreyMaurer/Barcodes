@@ -1,1 +1,8 @@
 *.txt
+*.obj
+*.tlog
+*.sdf
+*.suo
+*.exe
+*.ilk
+*.?db
