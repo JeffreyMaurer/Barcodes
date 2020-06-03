@@ -6,3 +6,6 @@
 *.exe
 *.ilk
 *.?db
+*.log
+*vcxproj*
+*.sln
