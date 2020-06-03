@@ -1,6 +1,0 @@
-global_int took 0 seconds
-global_struct took 0.000502 seconds
-local_int took 0 seconds
-local_struct took 0 seconds
-pointer_int took 0 seconds
-pointer_struct took 0.0005005 seconds
