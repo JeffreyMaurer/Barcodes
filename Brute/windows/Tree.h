@@ -4,16 +4,7 @@
 #include<vector>
 #include<string>
 #include<fstream>
-#include<chrono>
 using namespace std;
-using namespace chrono;
-
-//TODO: use SFML to visualize the tree
-
-enum eDuration
-{
-	CREATION, POP, CHECK, REMOVE_ERASE, SOLUTION, SIZE
-};
 
 class Tree
 {
@@ -24,7 +15,6 @@ private:
 	short solution_length;
 	Check check;
 	void next_layer(node& leaf);
-	duration<double> durs;
 public:
 	Tree(digit length_, digit del);
 	void solution_search();
