@@ -10,24 +10,6 @@ length_t power(int base, int exponent)
 	return sum;
 }
 
-ostream& operator<<(ostream& os, vector<bool>& input)
-{
-	for (int i = 0; i < input.size(); i++)
-	{
-		os << input[i] << " ";
-	}
-	return os;
-}
-
-ostream& operator<<(ostream& os, vector< duration<double> >& input)
-{
-	for (int i = 0; i < input.size(); i++)
-	{
-		os << input[i].count() << " ";
-	}
-	return os;
-}
-
 ostream& operator<<(ostream& os, vector<int>& input)
 {
 	for (int i = input.size() - 1; i >= 0; i--)

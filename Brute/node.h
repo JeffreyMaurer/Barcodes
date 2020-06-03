@@ -7,6 +7,7 @@ struct node
 	node * const parent;
 	const int distance;
 	const int value;
+	vector<int> next;
 
 	node() : value(0), distance(0), parent(nullptr) {}
 
@@ -24,6 +25,6 @@ struct node
 		next(parent_->next) 
 		{}
 
-	//void mem_dump();
-	//void mem_retrieve();
+	void mem_dump();
+	void mem_retrieve();
 };

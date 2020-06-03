@@ -5,16 +5,16 @@
 #include<cstdio>
 using namespace std;
 
-/*void node::mem_dump() 
+void node::mem_dump() 
 {
 	ofstream next_data;
 	if (parent != nullptr) 
 	{
-		next_data.open("/csm_data/experimentalmath/maurer/Tenengolts_Generate/brute/" + to_string(value) + "from" + to_string(parent->value) + ".txt");
+		next_data.open("tmp/" + to_string(value) + "from" + to_string(parent->value) + ".txt");
 	}
 	else
 	{
-		next_data.open("/csm_data/experimentalmath/maurer/Tenengolts_Generate/brute/" + to_string(value) + "from_root.txt");
+		next_data.open("tmp/" + to_string(value) + "from_root.txt");
 	}
 
 	for (int i = 0; i < next.size(); i++)
@@ -33,12 +33,12 @@ void node::mem_retrieve()
 	string name;
 	if (parent != nullptr)
 	{
-		name = "/csm_data/experimentalmath/maurer/Tenengolts_Generate/brute/" + to_string(value) + "from" + to_string(parent->value) + ".txt";
+		name = "tmp/" + to_string(value) + "from" + to_string(parent->value) + ".txt";
 		next_data.open(name.c_str());
 	}
 	else
 	{
-		name = "/csm_data/experimentalmath/maurer/Tenengolts_Generate/brute/" + to_string(value) + "from_root.txt";
+		name = "tmp/" + to_string(value) + "from_root.txt";
 		next_data.open(name.c_str());
 	}
 
@@ -51,6 +51,6 @@ void node::mem_retrieve()
 	next_data.close();
 
 	remove(name.c_str());
-}*/
+}
 
 
