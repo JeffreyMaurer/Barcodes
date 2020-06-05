@@ -7,15 +7,12 @@
 using namespace std;
 using namespace chrono;
 
-using ull_t = unsigned long long;
 using digit = short;
 using length_t = unsigned int;
 const int quaternary = 4;
 
 length_t power(int base, int exponent);
-ostream& operator<<(ostream& os, vector<bool>& input);
 ostream& operator<<(ostream& os, vector<int>& input);
-ostream& operator<<(ostream& os, vector< duration<double> >& input);
 
 template<typename T>
 ostream& operator<<(ostream& os, vector<T>& input)

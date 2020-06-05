@@ -1,5 +1,4 @@
 #pragma once
-//#include"node.h"
 #include"Check.h"
 #include<vector>
 #include<string>
@@ -11,6 +10,7 @@ class Tree
 {
 private:
 	digit length;
+	digit del;
 	vector<length_t> solution;
 	Check check;
 public:
